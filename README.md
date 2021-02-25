@@ -3,41 +3,49 @@
 
 
 ### Scenes
-- 1_ParticlesBasic
-  - Basic setup for the VFX graph
-    ![jpg](Media/1.jpg)
+- 1_ParticlesBasic (Basic setup for the VFX graph)
+  
+ ![jpg](Media/1.jpg)
 
 - 2_Noise
   - Visualizing the different types of noise in the graph
-  ![jpg](Media/2.jpg)
+  
+ ![jpg](Media/2.jpg)
   
 - 2_Textures2D
   - Showcasing how to use textures as data
-  ![jpg](Media/3.jpg)
+  
+ ![jpg](Media/3.jpg)
   
 - 2_PointCloudJitter
   - Showcasing a point cloud generated from textures
-  ![jpg](Media/4.jpg)
+  
+ ![jpg](Media/4.jpg)
   
 - 3_TextureBuffers
   - Using compute shaders to pass a texture to VFX graph and then read from it
-  ![jpg](Media/5.jpg)
+  
+ ![jpg](Media/5.jpg)
   
 - 3_Boids
     - Computing boids on a compute shader and then passing it to VFX graph
-    ![jpg](Media/6.jpg)
+
+![jpg](Media/6.jpg)
     
 - 4_PointCacheStatue
     - Baking a point cache of an asset and using it as sub-emitters
-    ![jpg](Media/7.jpg)
+
+![jpg](Media/7.jpg)
     
 - 5_AutumnLeaves_Basic
     - VFX graph example of simple autumn leaves falling down
-    ![jpg](Media/8.jpg)
+
+![jpg](Media/8.jpg)
     
 - 5_MasterBook
     - VFX graph example showcasing how some of the building blocks in previous scenes
-    ![jpg](Media/9.jpg)
+
+![jpg](Media/9.jpg)
     
 
 ### Usage/License
