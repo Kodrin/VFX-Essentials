@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 07e450b02ddc5df43b551e3a96aa050b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - visualizePositions: {instanceID: 0}
+  - graph: {instanceID: 0}
+  - particlePosTex: {instanceID: 0}
+  - particleCS: {fileID: 7200000, guid: 131c52bda54c0c64a928ad1bd91e310c, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

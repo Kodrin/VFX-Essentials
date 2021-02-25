@@ -1,0 +1,153 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel EncodePosition
+#pragma kernel ParticleBoidsCompute
+#pragma kernel ParticleMove
+
+#define SCALING_FACTOR 0.05
+
+//structs
+struct BoidsData
+{
+    float3 position;
+    float3 velocity;
+    float size;
+};
+
+//constants
+int _Resolution;
+float3 _Bounds;
+float3 _BoundsPosition;
+float _SpeedFac;
+float _SeparationFac;
+float _AlignmentFac;
+float _CohesionFac;
+
+
+//textures
+RWTexture2D<float4> _ParticlePositions;
+
+//buffer
+RWStructuredBuffer<BoidsData> _ParticleBuffer;
+
+[numthreads(16,16,1)]
+void EncodePosition (uint3 id : SV_DispatchThreadID)
+{
+    int index = id.x + id.y * _Resolution; //get the appropriate particle index based on uv.xy
+    
+    BoidsData particle = _ParticleBuffer[index];
+    float3 position = particle.position;
+    float size = particle.size * SCALING_FACTOR;
+
+    //set the position to the rgb of texture
+    _ParticlePositions[id.xy] = float4(position, size);
+}
+
+//we are compute the attraction and changing the velocity
+[numthreads(64,1,1)]
+void ParticleBoidsCompute (uint3 id : SV_DispatchThreadID)
+{
+    BoidsData particle = _ParticleBuffer[id.x];
+    float3 position = particle.position;
+    float3 velocity = particle.velocity;
+    float size = particle.size;
+    int particleCount = _Resolution * _Resolution;
+
+    int neighbourCount = 1;
+    float3 separation = float3(0,0,0);
+    float3 alignment = velocity; 
+    float3 cohesion = position;
+
+
+    for (int i = 0; i < particleCount; i++)
+    {
+        if(i == id.x) continue; //ignore self
+        
+        BoidsData otherParticle = _ParticleBuffer[i];
+        float range = (size + otherParticle.size) * SCALING_FACTOR;
+
+        //if they are within range 
+        if(distance(position, otherParticle.position) <  range )
+        {
+            //separation difference           
+            float3 diff = position - otherParticle.position;
+            float diffLen = (length(diff));
+            float scaler = clamp(1.0 - diffLen / (float)range, 0.0, 1.0);
+            float3 separationVector = diff * (scaler / diffLen);
+            
+            separation += separationVector;
+            alignment += otherParticle.velocity;
+            cohesion += otherParticle.position;
+            neighbourCount++;
+        }
+
+        
+    }
+    float avg = 1.0 / neighbourCount;
+    // separation *= avg;
+    alignment *= avg;
+    cohesion *= avg;
+    cohesion = (cohesion - position);
+    
+    if(true)
+    {
+        velocity += separation * _SeparationFac;
+        velocity += alignment * _AlignmentFac;
+        velocity += cohesion * _CohesionFac;
+    }
+
+    particle.velocity = normalize(velocity);
+    //set the position to the rgb of texture
+    _ParticleBuffer[id.x] = particle;
+}
+
+//we are just moving the particles and making sure they dont go out of bounds
+[numthreads(64,1,1)]
+void ParticleMove (uint3 id : SV_DispatchThreadID)
+{
+    BoidsData particle = _ParticleBuffer[id.x];
+    float3 position = particle.position;
+    float3 velocity = particle.velocity;
+    float size = particle.size;
+
+    particle.position += velocity * 0.5 * _SpeedFac;
+
+    if(particle.position.x > 1)
+    {
+        particle.velocity.x = -particle.velocity.x;
+        particle.position.x = 1;
+    }
+
+    if(particle.position.x < -1)
+    {
+        particle.velocity.x = -particle.velocity.x;
+        particle.position.x = -1;
+    }
+    
+    if(particle.position.y > 1)
+    {
+        particle.velocity.y = -particle.velocity.y;
+        particle.position.y = 1;
+    }
+
+    if(particle.position.y < -1)
+    {
+        particle.velocity.y = -particle.velocity.y;
+        particle.position.y = -1;
+    }
+
+    if(particle.position.z > 1)
+    {
+        particle.velocity.z = -particle.velocity.z;
+        particle.position.z = 1;
+    }
+
+    if(particle.position.z < -1)
+    {
+        particle.velocity.z = -particle.velocity.z;
+        particle.position.z = -1;
+    }
+    
+    //set the position to the rgb of texture
+    _ParticleBuffer[id.x] = particle;
+}
+

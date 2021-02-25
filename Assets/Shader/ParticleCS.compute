@@ -1,0 +1,81 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel EncodePosition
+#pragma kernel ParticleMove
+
+//structs
+struct BoidsData
+{
+    float3 position;
+    float3 velocity;
+    float size;
+};
+
+//constants
+int _Resolution;
+float3 _Bounds;
+float3 _BoundsPosition;
+
+
+//textures
+RWTexture2D<float4> _ParticlePositions;
+
+//buffer
+RWStructuredBuffer<BoidsData> _ParticleBuffer;
+
+[numthreads(16,16,1)]
+void EncodePosition (uint3 id : SV_DispatchThreadID)
+{
+    int index = id.x + id.y * _Resolution; //get the appropriate particle index based on uv.xy
+    
+    BoidsData particle = _ParticleBuffer[index];
+    float3 position = particle.position;
+
+    //set the position to the rgb of texture
+    _ParticlePositions[id.xy] = float4(position, 1);
+}
+
+//where the particles move
+[numthreads(64,1,1)]
+void ParticleMove (uint3 id : SV_DispatchThreadID)
+{
+    BoidsData particle = _ParticleBuffer[id.x]; //notice we use id.x because its just a 1d array
+    float3 position = particle.position;
+    float3 velocity = particle.velocity;
+    float size = particle.size;
+
+    particle.position += velocity * 0.0025;
+
+    if(particle.position.x > 1)
+    {
+        particle.velocity.x = -particle.velocity.x;
+    }
+
+    if(particle.position.x < -1)
+    {
+        particle.velocity.x = -particle.velocity.x;
+    }
+    
+    if(particle.position.y > 1)
+    {
+        particle.velocity.y = -particle.velocity.y;
+    }
+
+    if(particle.position.y < -1)
+    {
+        particle.velocity.y = -particle.velocity.y;
+    }
+
+    if(particle.position.z > 1)
+    {
+        particle.velocity.z = -particle.velocity.z;
+    }
+
+    if(particle.position.z < -1)
+    {
+        particle.velocity.z = -particle.velocity.z;
+    }
+    
+    //set the position to the rgb of texture
+    _ParticleBuffer[id.x] = particle;
+}
+
