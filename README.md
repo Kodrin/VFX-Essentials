@@ -1,23 +1,7 @@
-VFX-ESSENTIALS
+VFX-Essentials
 =============
 
-HDRP VFX-Graph workshop samples that go through some of the basic building blocks of working with particles in VFX-Graph. The samples go over waves, noise, point caches, textures, buffers, interactivity and more. Feel free to explore and use the samples!
-
-![gif](Media/0.gif)
-
-
-Usage/License
----
-**With the exception of the assets (3D models and associated textures)** , you are free to use the VFX graphs with no restrictions whatsoever. Crediting is appreciated but not necessary.
-
-### Models from SketchFab
-- [Niles Statue](https://sketchfab.com/3d-models/nile-42e02439c61049d681c897441d40aaa1#download)
-- [Coptic Prayer Boo](https://sketchfab.com/3d-models/coptic-prayer-book-500ec4621d764f0dadb8edc93b8700ae#download)
-- [Antique Book](https://sketchfab.com/3d-models/antique-leather-book-big-f62314240a0140a89e29119829aec000)
-
-### References
-- [RandomInsideSphere and ParticleIDToUV subgraphs by Keijiro](https://github.com/keijiro)
-
+VFX-Essentials is an on-going project that goes through some of the basic building blocks of working with particles in VFX-Graph in the hopes of familiarizing users with building FX in Unity. The samples go over waves, noise, point caches, textures, buffers, interactivity and more. Feel free to explore and use the samples!
 
 Scenes
 ===========
@@ -86,3 +70,17 @@ Scenes
 ---
 
 ![jpg](Media/skinnedmesh.jpg)
+
+Usage/License
+---
+**With the exception of the assets (3D models and associated textures)** , you are free to use the VFX graphs with no restrictions whatsoever. Crediting is appreciated but not necessary.
+
+Models from SketchFab
+---
+
+1. [Niles Statue](https://sketchfab.com/3d-models/nile-42e02439c61049d681c897441d40aaa1#download)
+2. [Coptic Prayer Book](https://sketchfab.com/3d-models/coptic-prayer-book-500ec4621d764f0dadb8edc93b8700ae#download)
+3. [Antique Book](https://sketchfab.com/3d-models/antique-leather-book-big-f62314240a0140a89e29119829aec000)
+
+### References
+1. [RandomInsideSphere and ParticleIDToUV subgraphs by Keijiro](https://github.com/keijiro)
