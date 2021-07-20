@@ -1,11 +1,13 @@
-# VFXGraph-Workshop
+VFX-ESSENTIALS
+=============
 
 HDRP VFX-Graph workshop samples that go through some of the basic building blocks of working with particles in VFX-Graph. The samples go over waves, noise, point caches, textures, buffers, interactivity and more. Feel free to explore and use the samples!
 
 ![gif](Media/0.gif)
 
 
-### Usage/License
+Usage/License
+---
 **With the exception of the assets (3D models and associated textures)** , you are free to use the VFX graphs with no restrictions whatsoever. Crediting is appreciated but not necessary.
 
 ### Models from SketchFab
@@ -17,47 +19,70 @@ HDRP VFX-Graph workshop samples that go through some of the basic building block
 - [RandomInsideSphere and ParticleIDToUV subgraphs by Keijiro](https://github.com/keijiro)
 
 
-### Scenes
-- 1_Waves (Creating curves, editing and animating them)
+Scenes
+===========
 
- ![jpg](Media/1.jpg)
+1: ParticlesBasic
+---
 
-- 2_Noise
-  - Visualizing the different types of noise in the graph
+ ![jpg](Media/particles.jpg)
 
- ![jpg](Media/2.jpg)
+1: Waves (Creating curves, editing and animating them)
+---
 
-- 2_Textures2D
-  - Showcasing how to use textures as data
+ ![jpg](Media/waves.jpg)
 
- ![jpg](Media/3.jpg)
+1: PickUp
+---
 
-- 2_PointCloudJitter
-  - Showcasing a point cloud generated from textures
+![jpg](Media/pickup.jpg)
 
- ![jpg](Media/4.jpg)
+2: Visualizing Noise
+---
 
-- 3_TextureBuffers
-  - Using compute shaders to pass a texture to VFX graph and then read from it
+ ![jpg](Media/noise.jpg)
 
- ![jpg](Media/5.jpg)
+2: Textures2D as Heightmap
+---
 
-- 3_Boids
-    - Computing boids on a compute shader and then passing it to VFX graph
+![jpg](Media/texture.jpg)
 
-![jpg](Media/6.jpg)
+2: PointCloudJitter (heightmap/camera interaction)
+---
 
-- 4_PointCacheStatue
-    - Baking a point cache of an asset and using it as sub-emitters
+![jpg](Media/landnoise.jpg)
 
-![jpg](Media/7.jpg)
+3: TextureBuffers with Compute shaders and VFX Graph
+---
 
-- 5_AutumnLeaves_Basic
-    - VFX graph example of simple autumn leaves falling down
+![jpg](Media/texturebuffer.jpg)
 
-![jpg](Media/8.jpg)
+3: Boids with Compute shaders and VFX Graph
+---
 
-- 5_MasterBook
-    - VFX graph example showcasing how some of the building blocks in previous scenes
+![jpg](Media/boids.jpg)
 
-![jpg](Media/9.jpg)
+4: Point Caches and meshes
+---
+
+![jpg](Media/pointcache.jpg)
+
+4: Burning Objects with Point Caches
+---
+
+![jpg](Media/burningobject.jpg)
+
+5: Autmun Leaves
+---
+
+![jpg](Media/leaves.jpg)
+
+5: Floating Books
+---
+
+![jpg](Media/book.jpg)
+
+7: Skinned Mesh
+---
+
+![jpg](Media/skinnedmesh.jpg)
